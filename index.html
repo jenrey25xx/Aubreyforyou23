@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mga Bulaklak na May Gulat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-1: #1a0f2e;
+      --bg-2: #2b1159;
+      --pink: #ff4da6;
+      --rose: #ff7eb6;
+      --gold: #ffd88a;
+      --cream: #fff8ef;
+      --mint: #7af5c5;
+      --shadow: rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Nunito", sans-serif;
+      color: var(--cream);
+      background: radial-gradient(circle at 10% 20%, #3b126f 0%, transparent 40%),
+                  radial-gradient(circle at 85% 12%, #63248c 0%, transparent 40%),
+                  radial-gradient(circle at 52% 90%, #40206a 0%, transparent 45%),
+                  linear-gradient(160deg, var(--bg-1), var(--bg-2));
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .sparkles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .sparkles span {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.75);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
+      }
+      15% { opacity: 0.9; }
+      80% { opacity: 0.9; }
+      100% {
+        transform: translateY(-120vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      width: min(1020px, 92vw);
+      margin: 0 auto;
+      padding: 3.5rem 0 2.5rem;
+    }
+
+    .hero {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+      grid-template-columns: 1.1fr 0.9fr;
+      margin-bottom: 2rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #ffe8f4;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(6px);
+      width: fit-content;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.1rem, 5vw, 4.2rem);
+      line-height: 1.08;
+      text-wrap: balance;
+      margin-bottom: 0.9rem;
+      color: #fff4ff;
+      text-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .lead {
+      max-width: 56ch;
+      font-size: clamp(1rem, 1.2vw, 1.2rem);
+      color: #f6e8ff;
+      opacity: 0.95;
+      margin-bottom: 1.6rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 14px;
+      padding: 0.85rem 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+      font-family: inherit;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .btn-primary {
+      color: #2a103f;
+      background: linear-gradient(135deg, var(--gold), #ffd26b);
+      box-shadow: 0 8px 20px rgba(255, 210, 107, 0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff7ff;
+      backdrop-filter: blur(6px);
+    }
+
+    .floral-card {
+      position: relative;
+      min-height: 330px;
+      border-radius: 24px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04));
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: 0 18px 48px var(--shadow);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+    }
+
+    .flower {
+      position: absolute;
+      left: 50%;
+      top: 56%;
+      transform: translate(-50%, -50%);
+      width: 170px;
+      height: 170px;
+      transition: transform 0.55s ease;
+    }
+
+    .petal {
+      position: absolute;
+      width: 70px;
+      height: 95px;
+      background: radial-gradient(circle at 40% 30%, #ffd8ec, var(--pink));
+      border-radius: 60% 60% 60% 60% / 70% 70% 45% 45%;
+      left: 50%;
+      top: 50%;
+      transform-origin: center 62px;
+      box-shadow: inset 0 -8px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .flower .petal:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-55px); }
+    .flower .petal:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg) translateY(-55px); }
+    .flower .petal:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg) translateY(-55px); }
+    .flower .petal:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg) translateY(-55px); }
+    .flower .petal:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg) translateY(-55px); }
+    .flower .petal:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg) translateY(-55px); }
+    .flower .petal:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg) translateY(-55px); }
+    .flower .petal:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg) translateY(-55px); }
+
+    .center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle at 35% 30%, #ffe9ad, #ffbc43);
+      box-shadow: inset 0 -10px 12px rgba(129, 66, 9, 0.28);
+      z-index: 1;
+    }
+
+    .stem {
+      position: absolute;
+      left: 50%;
+      top: 56%;
+      width: 9px;
+      height: 180px;
+      transform: translateX(-50%);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #88ffcf, #21b685 75%, #17856a);
+    }
+
+    .leaf {
+      position: absolute;
+      width: 58px;
+      height: 28px;
+      background: linear-gradient(130deg, #a5ffd8, #43d6a6);
+      border-radius: 70% 10% 70% 10%;
+    }
+
+    .leaf.left {
+      left: calc(50% - 56px);
+      top: 68%;
+      transform: rotate(-25deg);
+    }
+
+    .leaf.right {
+      left: calc(50% + 5px);
+      top: 74%;
+      transform: rotate(145deg);
+    }
+
+    .message-card {
+      margin-top: 1.2rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 16px;
+      padding: 0.95rem 1rem;
+      max-width: 620px;
+      color: #fffaf6;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.22);
+    }
+
+    .message-card strong {
+      color: #ffe9aa;
+    }
+
+    .reveal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    .reveal-item {
+      border-radius: 16px;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      backdrop-filter: blur(5px);
+      min-height: 124px;
+      transform: translateY(18px);
+      opacity: 0;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    .reveal-item.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .reveal-item h3 {
+      margin-bottom: 0.35rem;
+      color: #ffe29f;
+      font-size: 1.05rem;
+    }
+
+    .reveal-item p {
+      color: #f9f2ff;
+      line-height: 1.45;
+      font-size: 0.96rem;
+    }
+
+    .blooming .flower {
+      animation: pulseBloom 1s ease 1;
+    }
+
+    @keyframes pulseBloom {
+      0% { transform: translate(-50%, -50%) scale(0.75); }
+      40% { transform: translate(-50%, -50%) scale(1.12); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+
+    .floating-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 5;
+      animation: heartFly 2.1s ease-out forwards;
+      filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+      font-size: 20px;
+    }
+
+    @keyframes heartFly {
+      0% {
+        transform: translateY(0) scale(0.9);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-150px) translateX(var(--xdrift)) scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    .footer-note {
+      margin-top: 2.2rem;
+      opacity: 0.82;
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .floral-card {
+        min-height: 290px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        padding-top: 2.2rem;
+      }
+      .reveal-grid {
+        grid-template-columns: 1fr;
+      }
+      .message-card {
+        margin-top: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+
+  <audio id="bgMusic" preload="auto" autoplay>
+    <!-- Audio file: c:\Users\MIS-CCS-IT\Desktop\Flowers\assets\aubrey-by-bread.mp3.mp3 -->
+    <source src="assets/aubrey-by-bread.mp3.mp3" type="audio/mpeg" />
+    <source src="assets/TONEEJAY - 711 (Official Lyric Video).mp3" type="audio/mpeg" />
+    <source src="assets/Silent Sanctuary - 14 (Official Lyric Video).mp3" type="audio/mpeg" />
+  </audio>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="badge">Flower Studio - Para kay Aubrey</span>
+        <h1>Aubrey, buksan mo 'tong flower na 'to at magulat ka!</h1>
+        <p class="lead">
+          Isang cute na flower page na may konting magic. I-tap mo yung button para mag-bloom at gumanda yung colors.
+        </p>
+        <div class="actions">
+          <button class="btn btn-primary" id="surpriseBtn">Ipakita ang Gulat</button>
+          <button class="btn btn-secondary" id="themeBtn">Palit ng Mood</button>
+          <button class="btn btn-secondary" id="musicBtn" type="button">Musika: Naka-off</button>
+          <button class="btn btn-secondary" id="nextBtn" type="button">Next</button>
+        </div>
+
+        <div class="message-card" id="messageCard">
+          <strong>Love letter para kay Aubrey (LDR):</strong> Ikaw at ako, kahit malayo—love pa rin tayo.
+        </div>
+      </div>
+
+      <article class="floral-card" id="flowerCard">
+        <div class="flower" aria-hidden="true">
+          <span class="petal"></span>
+          <span class="petal"></span>
+          <span class="petal"></span>
+          <span class="petal"></span>
+          <span class="petal"></span>
+          <span class="petal"></span>
+          <span class="petal"></span>
+          <span class="petal"></span>
+          <span class="center"></span>
+        </div>
+        <span class="stem"></span>
+        <span class="leaf left"></span>
+        <span class="leaf right"></span>
+      </article>
+    </section>
+
+    <section class="reveal-grid" id="revealGrid">
+      <article class="reveal-item">
+        <h3>Sinag ng Rosas</h3>
+        <p>Classy pero warm. Para sa mga moment na may love at celebration.</p>
+      </article>
+      <article class="reveal-item">
+        <h3>Tulip na Parang Takipsilim</h3>
+        <p>Matapang na petals na may kulay ng takipsilim. Bigla kang ganahan gumalaw.</p>
+      </article>
+      <article class="reveal-item">
+        <h3>Hardin ng Mint</h3>
+        <p>Fresh na green accents at malambot na vibe na nakaka-calm.</p>
+      </article>
+    </section>
+
+    <p class="footer-note">Gawa sa HTML, CSS, at kaunting flower magic.</p>
+  </main>
+
+  <script>
+    const personName = "Aubrey";
+
+    const surpriseBtn = document.getElementById("surpriseBtn");
+    const themeBtn = document.getElementById("themeBtn");
+    const musicBtn = document.getElementById("musicBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const bgMusic = document.getElementById("bgMusic");
+    const flowerCard = document.getElementById("flowerCard");
+    const revealItems = [...document.querySelectorAll(".reveal-item")];
+    const messageCard = document.getElementById("messageCard");
+    const sparkles = document.getElementById("sparkles");
+
+    const messages = [
+      `Aubrey, kahit LDR tayo at malayo ang yakap—ikaw pa rin ang unang naiisip ko. Sana sa bawat bloom dito, ramdam mo yung love nating dalawa.`,
+      `May mga araw na distance lang ang pagitan, pero kapag iniisip kita, parang nandiyan ka na. Ikaw yung calm ko, Aubrey.`,
+      `Aubrey, pangako: ipapadala ko yung pag-ibig kahit malayo tayo. Darating din yung araw na magkakahawak-kamay tayo.`
+    ];
+
+    const palettes = [
+      { p1: "#1a0f2e", p2: "#2b1159", pink: "#ff4da6", gold: "#ffd88a" },
+      { p1: "#0f1d3a", p2: "#1a3e7a", pink: "#ff6f91", gold: "#ffe28f" },
+      { p1: "#17271a", p2: "#2a5b31", pink: "#ff8ab3", gold: "#f8df90" }
+    ];
+
+    let paletteIndex = 0;
+
+    const tracks = [
+      { name: "Aubrey - Bread", src: "assets/aubrey-by-bread.mp3.mp3" },
+      { name: "Silent Sanctuary - 14", src: "assets/Silent Sanctuary - 14 (Official Lyric Video).mp3" },
+      { name: "TONEEJAY - 711", src: "assets/TONEEJAY - 711 (Official Lyric Video).mp3" }
+    ];
+
+    let trackIndex = 0;
+
+    function loadTrack(index) {
+      trackIndex = index;
+      bgMusic.src = tracks[trackIndex].src;
+      bgMusic.load();
+    }
+
+    loadTrack(0);
+
+    bgMusic.volume = 0.45;
+
+    function syncMusicUI() {
+      const playing = !bgMusic.paused;
+      if (!playing) {
+        musicBtn.textContent = "Musika: Naka-off";
+        return;
+      }
+      const suffix = tracks[trackIndex] ? " - " + tracks[trackIndex].name : "";
+      musicBtn.textContent = bgMusic.muted ? "Musika: Naka-on (tap para sa tunog)" + suffix : "Musika: Naka-on" + suffix;
+    }
+
+    bgMusic.addEventListener("playing", syncMusicUI);
+    bgMusic.addEventListener("pause", syncMusicUI);
+
+    async function tryPlayMusic({ unmuteSound = false } = {}) {
+      if (unmuteSound) bgMusic.muted = false;
+      try {
+        await bgMusic.play();
+      } catch {
+        // Autoplay can be blocked depending on browser settings.
+      } finally {
+        syncMusicUI();
+      }
+    }
+
+    bgMusic.addEventListener("ended", () => {
+      const nextIndex = (trackIndex + 1) % tracks.length;
+      loadTrack(nextIndex);
+      // Keep the current mute state; just try to continue playback.
+      void tryPlayMusic({ unmuteSound: !bgMusic.muted });
+    });
+
+    function nextTrack() {
+      const nextIndex = (trackIndex + 1) % tracks.length;
+      loadTrack(nextIndex);
+      // Skip to next track and continue playing.
+      void tryPlayMusic({ unmuteSound: !bgMusic.muted });
+    }
+
+    async function attemptAutoplay() {
+      // Try audible autoplay first.
+      try {
+        bgMusic.muted = false;
+        await bgMusic.play();
+      } catch {
+        // If blocked, start muted so playback begins "agad" (audio becomes audible after user gesture).
+        try {
+          bgMusic.muted = true;
+          await bgMusic.play();
+        } catch {
+          // Give up if everything is blocked.
+        }
+      } finally {
+        syncMusicUI();
+      }
+    }
+
+    function toggleMusic() {
+      if (bgMusic.paused) {
+        void tryPlayMusic({ unmuteSound: true });
+      } else {
+        bgMusic.pause();
+        syncMusicUI();
+      }
+    }
+
+    musicBtn.addEventListener("click", toggleMusic);
+    nextBtn.addEventListener("click", nextTrack);
+
+    const unlockSoundOnce = () => {
+      if (bgMusic.muted) {
+        void tryPlayMusic({ unmuteSound: true });
+      } else {
+        syncMusicUI();
+      }
+    };
+
+    document.addEventListener("pointerdown", unlockSoundOnce, { once: true });
+    document.addEventListener("touchstart", unlockSoundOnce, { once: true });
+    document.addEventListener("keydown", unlockSoundOnce, { once: true });
+
+    void attemptAutoplay();
+
+    function createSparkles() {
+      for (let i = 0; i < 26; i += 1) {
+        const dot = document.createElement("span");
+        dot.style.left = Math.random() * 100 + "vw";
+        dot.style.bottom = -Math.random() * 40 + "px";
+        dot.style.animationDuration = 7 + Math.random() * 7 + "s";
+        dot.style.animationDelay = Math.random() * 6 + "s";
+        dot.style.opacity = 0.2 + Math.random() * 0.6;
+        sparkles.appendChild(dot);
+      }
+    }
+
+    function dropHearts() {
+      for (let i = 0; i < 14; i += 1) {
+        const heart = document.createElement("span");
+        heart.className = "floating-heart";
+        heart.textContent = Math.random() > 0.5 ? "🌸" : "💖";
+        heart.style.left = 20 + Math.random() * 60 + "vw";
+        heart.style.top = 50 + Math.random() * 20 + "vh";
+        heart.style.setProperty("--xdrift", -45 + Math.random() * 90 + "px");
+        heart.style.animationDelay = i * 60 + "ms";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2300);
+      }
+    }
+
+    function revealCards() {
+      revealItems.forEach((item, index) => {
+        setTimeout(() => item.classList.add("show"), index * 180);
+      });
+    }
+
+    surpriseBtn.addEventListener("click", () => {
+      flowerCard.classList.remove("blooming");
+      void flowerCard.offsetWidth;
+      flowerCard.classList.add("blooming");
+
+      const selected = messages[Math.floor(Math.random() * messages.length)];
+      messageCard.innerHTML = "<strong>Love letter para kay " + personName + " (LDR):</strong> " + selected;
+
+      // Unmute/start the song when the user clicks.
+      void tryPlayMusic({ unmuteSound: true });
+
+      revealCards();
+      dropHearts();
+    });
+
+    themeBtn.addEventListener("click", () => {
+      paletteIndex = (paletteIndex + 1) % palettes.length;
+      const next = palettes[paletteIndex];
+      document.documentElement.style.setProperty("--bg-1", next.p1);
+      document.documentElement.style.setProperty("--bg-2", next.p2);
+      document.documentElement.style.setProperty("--pink", next.pink);
+      document.documentElement.style.setProperty("--gold", next.gold);
+    });
+
+    createSparkles();
+  </script>
+</body>
+</html>
